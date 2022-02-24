@@ -7,7 +7,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:very_good_slide_puzzle/audio_control/audio_control.dart';
-import 'package:very_good_slide_puzzle/dashatar/dashatar.dart';
 import 'package:very_good_slide_puzzle/models/models.dart';
 import 'package:very_good_slide_puzzle/puzzle/puzzle.dart';
 import 'package:very_good_slide_puzzle/simple/simple.dart';
@@ -18,7 +17,6 @@ import '../../helpers/helpers.dart';
 void main() {
   group('PuzzleKeyboardHandler', () {
     late ThemeBloc themeBloc;
-    late DashatarPuzzleBloc dashatarPuzzleBloc;
     late PuzzleBloc puzzleBloc;
     late Puzzle puzzle;
     late AudioPlayer audioPlayer;
@@ -34,16 +32,10 @@ void main() {
       themeBloc = MockThemeBloc();
       when(() => themeBloc.state).thenReturn(
         ThemeState(
-          themes: [SimpleTheme(), GreenDashatarTheme()],
+          themes: [SimpleTheme()],
           theme: SimpleTheme(),
         ),
       );
-
-      dashatarPuzzleBloc = MockDashatarPuzzleBloc();
-      when(() => dashatarPuzzleBloc.state).thenReturn(
-        DashatarPuzzleState(secondsToBegin: 3),
-      );
-
       puzzleBloc = MockPuzzleBloc();
       final puzzleState = MockPuzzleState();
       puzzle = MockPuzzle();
@@ -76,7 +68,6 @@ void main() {
           audioPlayer: () => audioPlayer,
         ),
         themeBloc: themeBloc,
-        dashatarPuzzleBloc: dashatarPuzzleBloc,
         puzzleBloc: puzzleBloc,
         audioControlBloc: audioControlBloc,
       );
@@ -110,7 +101,6 @@ void main() {
           audioPlayer: () => audioPlayer,
         ),
         themeBloc: themeBloc,
-        dashatarPuzzleBloc: dashatarPuzzleBloc,
         puzzleBloc: puzzleBloc,
         audioControlBloc: audioControlBloc,
       );
@@ -144,7 +134,6 @@ void main() {
           audioPlayer: () => audioPlayer,
         ),
         themeBloc: themeBloc,
-        dashatarPuzzleBloc: dashatarPuzzleBloc,
         puzzleBloc: puzzleBloc,
         audioControlBloc: audioControlBloc,
       );
@@ -178,7 +167,6 @@ void main() {
           audioPlayer: () => audioPlayer,
         ),
         themeBloc: themeBloc,
-        dashatarPuzzleBloc: dashatarPuzzleBloc,
         puzzleBloc: puzzleBloc,
         audioControlBloc: audioControlBloc,
       );
@@ -196,64 +184,6 @@ void main() {
       verify(() => audioPlayer.setAsset('assets/audio/tile_move.mp3'))
           .called(1);
       verify(audioPlayer.play).called(1);
-    });
-
-    testWidgets(
-        'does not add TileTapped '
-        'when arrow is pressed and '
-        'Dashatar puzzle is not started', (tester) async {
-      when(() => themeBloc.state).thenReturn(
-        ThemeState(
-          themes: [SimpleTheme(), GreenDashatarTheme()],
-          theme: GreenDashatarTheme(),
-        ),
-      );
-
-      await tester.pumpApp(
-        PuzzleKeyboardHandler(child: SizedBox()),
-        themeBloc: themeBloc,
-        dashatarPuzzleBloc: dashatarPuzzleBloc,
-        puzzleBloc: puzzleBloc,
-        audioControlBloc: audioControlBloc,
-      );
-
-      await simulateKeyDownEvent(
-        LogicalKeyboardKey.arrowLeft,
-        physicalKey: PhysicalKeyboardKey.arrowLeft,
-      );
-
-      verifyNever(() => puzzle.getTileRelativeToWhitespaceTile(Offset(1, 0)));
-      verifyNever(() => puzzleBloc.add(TileTapped(tile)));
-    });
-
-    testWidgets('renders child', (tester) async {
-      const key = Key('__child__');
-
-      await tester.pumpApp(
-        PuzzleKeyboardHandler(
-          child: SizedBox(key: key),
-        ),
-        themeBloc: themeBloc,
-        dashatarPuzzleBloc: dashatarPuzzleBloc,
-        puzzleBloc: puzzleBloc,
-        audioControlBloc: audioControlBloc,
-      );
-
-      expect(find.byKey(key), findsOneWidget);
-    });
-
-    testWidgets('renders AudioControlListener', (tester) async {
-      await tester.pumpApp(
-        PuzzleKeyboardHandler(
-          child: SizedBox(),
-        ),
-        themeBloc: themeBloc,
-        dashatarPuzzleBloc: dashatarPuzzleBloc,
-        puzzleBloc: puzzleBloc,
-        audioControlBloc: audioControlBloc,
-      );
-
-      expect(find.byType(AudioControlListener), findsOneWidget);
     });
   });
 }

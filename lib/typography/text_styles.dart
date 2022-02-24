@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:very_good_slide_puzzle/colors/colors.dart';
 import 'package:very_good_slide_puzzle/typography/typography.dart';
 
@@ -8,16 +7,20 @@ class PuzzleTextStyle {
   /// Headline 1 text style
   static TextStyle get headline1 {
     return _baseTextStyle.copyWith(
-      fontSize: 74,
+      fontFamily: 'Charmonman',
+      fontSize: 110,
+      height: 1.5,
       fontWeight: PuzzleFontWeight.bold,
+      letterSpacing: 2,
     );
   }
 
   /// Headline 2 text style
   static TextStyle get headline2 {
     return _baseTextStyle.copyWith(
-      fontSize: 54,
-      height: 1.1,
+      fontFamily: 'NeuropolNova',
+      fontSize: 110,
+      height: -0.3,
       fontWeight: PuzzleFontWeight.bold,
     );
   }
@@ -25,7 +28,7 @@ class PuzzleTextStyle {
   /// Headline 3 text style
   static TextStyle get headline3 {
     return _baseTextStyle.copyWith(
-      fontSize: 34,
+      fontSize: 55,
       height: 1.12,
       fontWeight: PuzzleFontWeight.bold,
     );
@@ -43,7 +46,7 @@ class PuzzleTextStyle {
   /// Headline 4 text style
   static TextStyle get headline4 {
     return _baseTextStyle.copyWith(
-      fontSize: 24,
+      fontSize: 18,
       height: 1.15,
       fontWeight: PuzzleFontWeight.bold,
     );
@@ -52,7 +55,7 @@ class PuzzleTextStyle {
   /// Headline 4 Soft text style
   static TextStyle get headline4Soft {
     return _baseTextStyle.copyWith(
-      fontSize: 24,
+      fontSize: 18,
       height: 1.15,
       fontWeight: PuzzleFontWeight.regular,
     );
@@ -131,12 +134,13 @@ class PuzzleTextStyle {
   }
 
   static const _baseTextStyle = TextStyle(
-    fontFamily: 'GoogleSans',
+    fontFamily: 'HelveticaNeue',
     color: PuzzleColors.black,
     fontWeight: PuzzleFontWeight.regular,
   );
 
-  static final _bodyTextStyle = GoogleFonts.roboto(
+  static const _bodyTextStyle = TextStyle(
+    fontFamily: 'HelveticaNeue',
     color: PuzzleColors.black,
     fontWeight: PuzzleFontWeight.regular,
   );

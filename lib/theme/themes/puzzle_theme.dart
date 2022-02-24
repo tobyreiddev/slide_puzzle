@@ -22,6 +22,9 @@ abstract class PuzzleTheme extends Equatable {
   /// The text color of the puzzle title.
   Color get titleColor;
 
+  /// The text color of the puzzle subtitle.
+  Color get subtitleColor;
+
   /// The background color of this theme.
   Color get backgroundColor;
 

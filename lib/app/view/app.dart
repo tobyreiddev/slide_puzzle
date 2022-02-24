@@ -58,94 +58,6 @@ class _AppState extends State<App> {
     super.initState();
 
     _platformHelper = widget._platformHelperFactory();
-
-    _timer = Timer(const Duration(milliseconds: 20), () {
-      for (var i = 1; i <= 15; i++) {
-        precacheImage(
-          Image.asset('assets/images/dashatar/green/$i.png').image,
-          context,
-        );
-        precacheImage(
-          Image.asset('assets/images/dashatar/blue/$i.png').image,
-          context,
-        );
-        precacheImage(
-          Image.asset('assets/images/dashatar/yellow/$i.png').image,
-          context,
-        );
-      }
-      precacheImage(
-        Image.asset('assets/images/dashatar/gallery/green.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/dashatar/success/green.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/dashatar/gallery/blue.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/dashatar/success/blue.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/dashatar/gallery/yellow.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/dashatar/success/yellow.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/logo_flutter_color.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/logo_flutter_white.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/shuffle_icon.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/timer_icon.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/simple_dash_large.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/simple_dash_medium.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/simple_dash_small.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/twitter_icon.png').image,
-        context,
-      );
-      precacheImage(
-        Image.asset('assets/images/facebook_icon.png').image,
-        context,
-      );
-
-      for (final audioControlAsset in audioControlAssets) {
-        precacheImage(
-          Image.asset(audioControlAsset).image,
-          context,
-        );
-      }
-
-      for (final audioAsset in audioAssets) {
-        prefetchToMemory(audioAsset);
-      }
-    });
   }
 
   /// Prefetches the given [filePath] to memory.
@@ -183,6 +95,7 @@ class _AppState extends State<App> {
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       home: const PuzzlePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

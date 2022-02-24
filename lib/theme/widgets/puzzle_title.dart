@@ -12,11 +12,15 @@ class PuzzleTitle extends StatelessWidget {
   const PuzzleTitle({
     Key? key,
     required this.title,
+    required this.subtitle,
     this.color,
   }) : super(key: key);
 
   /// The title to be displayed.
   final String title;
+
+  /// The title to be displayed.
+  final String subtitle;
 
   /// The color of [title], defaults to [PuzzleTheme.titleColor].
   final Color? color;
@@ -25,6 +29,7 @@ class PuzzleTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.select((ThemeBloc bloc) => bloc.state.theme);
     final titleColor = color ?? theme.titleColor;
+    final subtitleColor = color ?? theme.subtitleColor;
 
     return ResponsiveLayoutBuilder(
       small: (context, child) => Center(
@@ -44,21 +49,57 @@ class PuzzleTitle extends StatelessWidget {
       ),
       child: (currentSize) {
         final textStyle = (currentSize == ResponsiveLayoutSize.large
-                ? PuzzleTextStyle.headline2
-                : PuzzleTextStyle.headline3)
-            .copyWith(color: titleColor);
+                ? PuzzleTextStyle.headline1.copyWith(fontSize: 92)
+                : PuzzleTextStyle.headline1.copyWith(fontSize: 86))
+            .copyWith(
+          shadows: [
+            Shadow(
+              color: titleColor,
+              blurRadius: 20,
+            )
+          ],
+          foreground: Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 0.1
+            ..color = titleColor,
+        );
+
+        final subtitleTextStyle = (currentSize == ResponsiveLayoutSize.large
+                ? PuzzleTextStyle.headline2.copyWith(fontSize: 55)
+                : PuzzleTextStyle.headline2.copyWith(fontSize: 42))
+            .copyWith(
+          color: subtitleColor,
+          shadows: [
+            Shadow(
+              color: subtitleColor,
+              blurRadius: 10,
+            )
+          ],
+        );
 
         final textAlign = currentSize == ResponsiveLayoutSize.small
             ? TextAlign.center
             : TextAlign.left;
 
-        return AnimatedDefaultTextStyle(
-          style: textStyle,
-          duration: PuzzleThemeAnimationDuration.textStyle,
-          child: Text(
-            title,
-            textAlign: textAlign,
-          ),
+        return Column(
+          children: [
+            AnimatedDefaultTextStyle(
+              style: textStyle,
+              duration: PuzzleThemeAnimationDuration.textStyle,
+              child: Text(
+                title,
+                textAlign: textAlign,
+              ),
+            ),
+            AnimatedDefaultTextStyle(
+              style: subtitleTextStyle,
+              duration: PuzzleThemeAnimationDuration.textStyle,
+              child: Text(
+                subtitle,
+                textAlign: textAlign,
+              ),
+            ),
+          ],
         );
       },
     );

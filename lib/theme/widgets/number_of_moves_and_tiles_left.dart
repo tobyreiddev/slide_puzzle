@@ -39,14 +39,6 @@ class NumberOfMovesAndTilesLeft extends StatelessWidget {
       medium: (context, child) => Center(child: child),
       large: (context, child) => child!,
       child: (currentSize) {
-        final mainAxisAlignment = currentSize == ResponsiveLayoutSize.large
-            ? MainAxisAlignment.start
-            : MainAxisAlignment.center;
-
-        final bodyTextStyle = currentSize == ResponsiveLayoutSize.small
-            ? PuzzleTextStyle.bodySmall
-            : PuzzleTextStyle.body;
-
         return Semantics(
           label: l10n.puzzleNumberOfMovesAndTilesLeftLabelText(
             numberOfMoves.toString(),
@@ -55,8 +47,7 @@ class NumberOfMovesAndTilesLeft extends StatelessWidget {
           child: ExcludeSemantics(
             child: Row(
               key: const Key('number_of_moves_and_tiles_left'),
-              mainAxisAlignment: mainAxisAlignment,
-              crossAxisAlignment: CrossAxisAlignment.baseline,
+              mainAxisAlignment: MainAxisAlignment.center,
               textBaseline: TextBaseline.alphabetic,
               children: [
                 AnimatedDefaultTextStyle(
@@ -68,7 +59,7 @@ class NumberOfMovesAndTilesLeft extends StatelessWidget {
                   child: Text(numberOfMoves.toString()),
                 ),
                 AnimatedDefaultTextStyle(
-                  style: bodyTextStyle.copyWith(
+                  style: PuzzleTextStyle.headline4.copyWith(
                     color: textColor,
                   ),
                   duration: PuzzleThemeAnimationDuration.textStyle,
@@ -83,7 +74,7 @@ class NumberOfMovesAndTilesLeft extends StatelessWidget {
                   child: Text(numberOfTilesLeft.toString()),
                 ),
                 AnimatedDefaultTextStyle(
-                  style: bodyTextStyle.copyWith(
+                  style: PuzzleTextStyle.headline4.copyWith(
                     color: textColor,
                   ),
                   duration: PuzzleThemeAnimationDuration.textStyle,

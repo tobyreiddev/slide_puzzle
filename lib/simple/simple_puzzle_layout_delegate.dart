@@ -189,9 +189,6 @@ class SimpleStartSection extends StatelessWidget {
           medium: 83,
           large: 151,
         ),
-        PuzzleName(
-          key: puzzleNameKey,
-        ),
         const ResponsiveGap(large: 16),
         SimplePuzzleTitle(
           status: state.puzzleStatus,
@@ -241,9 +238,8 @@ class SimplePuzzleTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return PuzzleTitle(
       key: puzzleTitleKey,
-      title: status == PuzzleStatus.complete
-          ? context.l10n.puzzleCompleted
-          : context.l10n.puzzleChallengeTitle,
+      title: context.l10n.puzzleChallengeTitle,
+      subtitle: context.l10n.puzzleChallengeSubtitle,
     );
   }
 }

@@ -8,9 +8,13 @@
     "@puzzleRestartTooltip": {
         "description": "Shown as a tooltip for the puzzle restart button"
     },
-    "puzzleChallengeTitle": "Puzzle Challenge",
+    "puzzleChallengeTitle": "Puzzle",
     "@puzzleChallengeTitle": {
         "description": "Shown as the title of the puzzle"
+    },
+    "puzzleChallengeSubtitle": "Challenge",
+    "@puzzleChallengeSubtitle": {
+        "description": "Shown as the subtitle of the puzzle"
     },
     "puzzleNumberOfMoves": "Moves",
     "@puzzleNumberOfMoves": {
@@ -139,5 +143,22 @@
     "dashatarSuccessShareText": "Just solved the #FlutterPuzzleHack! Check it out ↓",
     "@dashatarSuccessShareText": {
         "description": "The text to share for this Flutter Puzzle challenge, shown in the Dashatar success state"
+    },
+    
+    "neonGoalTitle": "Goal",
+    "@neonGoalTitle": {
+        "description": "The title to explain the goal, shown in the instructions bottom sheet"
+    },
+    "neonGoalText": "Move all 15 tiles into the order 1-15 starting in the top left corner!",
+    "@neonGoalText": {
+        "description": "The text to explain the goal, shown in the instructions bottom sheet"
+    },
+    "neonInstructionsTitle": "How to play",
+    "@neonInstructionsTitle": {
+        "description": "The title to explain the instructions, shown in the instructions bottom sheet"
+    },
+    "neonInstructionsText": "Tap a tile in the row or column you'd like to move and it'll slide into the empty space if possible",
+    "@neonInstructionsText": {
+        "description": "The text to explain the instructions, shown in the instructions bottom sheet"
     }
 }

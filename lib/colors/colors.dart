@@ -86,3 +86,57 @@ abstract class PuzzleColors {
   /// Yellow 50
   static const Color yellow50 = Color(0xFF9E9400);
 }
+
+/// Defines the color palette for the puzzle UI.
+abstract class NeonPuzzleColors {
+  /// Dark Grey
+  static const Color darkGrey = Color(0xFF121212);
+
+  /// Grey High
+  static const Color greyHigh = Color(0xFFE0E0E0);
+
+  /// Grey Medium
+  static const Color greyMed = Color(0xFFA0A0A0);
+
+  /// Grey Disabled
+  static const Color greyDisabled = Color(0xFF6C6C6C);
+
+  /// Text Regular
+  static const Color textRegular = Color(0xFFA0A0A0);
+
+  /// Surface
+  static const Color surface = Color(0xFF121212);
+
+  /// Button
+  static const Color button = Color(0xFFFCFCFC);
+
+  /// Neon green
+  static const Color neonGreen = Color(0xFFC0FC3F);
+
+  /// Neon blue
+  static const Color neonBlue = Color(0xFF3AFAFC);
+
+  /// Neon pink
+  static const Color neonPink = Color(0xFFE23FF7);
+
+  /// Medium neon pink
+  static const Color mediumNeonPink = Color(0xFF6E2576);
+
+  /// Darkest neon pink
+  static const Color darkestNeonPink = Color(0xFF3B1A3F);
+
+  /// Select neon pink
+  static const Color selectNeonPink = Color(0xFFAD33BE);
+
+  /// Neon yellow
+  static const Color neonYellow = Color(0xFFFFE027);
+
+  /// Shadow
+  static const Color shadow = Color(0xFF000000);
+
+  /// Button text color
+  static const Color buttonTextColor = NeonPuzzleColors.button;
+
+  /// Button background color
+  static const Color buttonBackgroundColor = NeonPuzzleColors.neonPink;
+}

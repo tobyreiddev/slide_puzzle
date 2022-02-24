@@ -25,6 +25,9 @@ class SimpleTheme extends PuzzleTheme {
   Color get titleColor => PuzzleColors.primary1;
 
   @override
+  Color get subtitleColor => PuzzleColors.primary1;
+
+  @override
   Color get backgroundColor => PuzzleColors.white;
 
   @override
