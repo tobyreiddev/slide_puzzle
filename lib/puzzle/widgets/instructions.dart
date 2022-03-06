@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:very_good_slide_puzzle/colors/colors.dart';
 import 'package:very_good_slide_puzzle/l10n/l10n.dart';
 import 'package:very_good_slide_puzzle/theme/theme.dart';
 import 'package:very_good_slide_puzzle/typography/typography.dart';
@@ -13,7 +14,10 @@ class Instructions extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.select((ThemeBloc bloc) => bloc.state.theme);
     return IconButton(
-      icon: const Icon(Icons.info_outline),
+      icon: const Icon(
+        Icons.info_outline,
+        color: NeonPuzzleColors.greyMed,
+      ),
       onPressed: () {
         showModalBottomSheet<void>(
           context: context,
@@ -84,7 +88,7 @@ class Instructions extends StatelessWidget {
                       icon: const Icon(Icons.remove_circle_outline),
                       onPressed: () => Navigator.pop(context),
                       highlightColor: theme.defaultColor,
-                      color: theme.defaultColor,
+                      color: NeonPuzzleColors.greyMed,
                     ),
                   ],
                 ),
