@@ -237,7 +237,7 @@ class NeonPuzzleShuffleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return PuzzleButton(
       textColor: NeonPuzzleColors.buttonTextColor,
-      backgroundColor: Colors.transparent,
+      backgroundColor: NeonPuzzleColors.selectNeonPink,
       onPressed: () => context.read<PuzzleBloc>().add(const PuzzleReset()),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
