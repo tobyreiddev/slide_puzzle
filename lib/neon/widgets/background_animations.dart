@@ -1,7 +1,31 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:very_good_slide_puzzle/models/models.dart';
 
+///
+
+final animations = <AnimationModel>[
+  const AnimationModel(
+    path: 'assets/rive/flamingo_V2.riv',
+    name: 'flamingo_animation',
+  ),
+  const AnimationModel(
+    path: 'assets/rive/palm_V2.riv',
+    name: 'palm_animation',
+  ),
+  const AnimationModel(
+    path: 'assets/rive/planet_V2.riv',
+    name: 'planet_animation',
+  ),
+];
+
+/// {@template background_animations}
+/// Displays rive animations as part of the PuzzlePage.
+/// {@endtemplate}
 class BackgroundAnimations extends StatefulWidget {
+  /// {@macro background_animations}
   const BackgroundAnimations({Key? key}) : super(key: key);
 
   @override
@@ -11,31 +35,25 @@ class BackgroundAnimations extends StatefulWidget {
 class _BackgroundAnimationsState extends State<BackgroundAnimations> {
   // Controller for playback
   late RiveAnimationController _controller;
-
-  // Toggles between play and pause animation states
-  void _togglePlay() =>
-      setState(() => _controller.isActive = !_controller.isActive);
-
-  /// Tracks if the animation is playing by whether controller is running
-  bool get isPlaying => _controller.isActive;
+  late AnimationModel _animationData;
 
   @override
   void initState() {
     super.initState();
-    _controller = SimpleAnimation('idle');
+
+    _animationData = animations[Random().nextInt(animations.length)];
+    _controller = SimpleAnimation(_animationData.name);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: RiveAnimation.asset(
-        'assets/rive/neon_animations_left.riv',
-        animations: const [
-          'Idle',
-        ],
-        controllers: [_controller],
-        fit: BoxFit.cover,
-      ),
+    return RiveAnimation.asset(
+      _animationData.path,
+      animations: [
+        _animationData.name,
+      ],
+      controllers: [_controller],
+      alignment: Alignment.bottomRight,
     );
   }
 }

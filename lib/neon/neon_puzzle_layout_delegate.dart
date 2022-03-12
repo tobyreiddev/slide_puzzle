@@ -81,12 +81,24 @@ class NeonPuzzleLayoutDelegate extends PuzzleLayoutDelegate {
   @override
   Widget backgroundBuilder(PuzzleState state) {
     return Positioned(
-      right: 0,
-      bottom: 0,
+      right: 50,
+      bottom: 50,
       child: ResponsiveLayoutBuilder(
-        small: (_, __) => const BackgroundAnimations(),
-        medium: (_, __) => const BackgroundAnimations(),
-        large: (_, __) => const BackgroundAnimations(),
+        small: (_, __) => const SizedBox(
+          width: 118,
+          height: 118,
+          child: BackgroundAnimations(),
+        ),
+        medium: (_, __) => const SizedBox(
+          width: 214,
+          height: 214,
+          child: BackgroundAnimations(),
+        ),
+        large: (_, __) => const SizedBox(
+          width: 320,
+          height: 320,
+          child: BackgroundAnimations(),
+        ),
       ),
     );
   }
