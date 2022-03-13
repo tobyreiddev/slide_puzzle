@@ -133,7 +133,7 @@ class _NeonPuzzleTileState extends State<NeonPuzzleTile>
               scale: _scale,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  primary: PuzzleColors.white,
+                  primary: Colors.transparent,
                   textStyle: PuzzleTextStyle.body.copyWith(
                     fontSize: widget.tileFontSize,
                   ),
