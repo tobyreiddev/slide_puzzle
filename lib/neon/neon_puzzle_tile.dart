@@ -44,13 +44,13 @@ class NeonPuzzleTile extends StatefulWidget {
 
 class _NeonPuzzleTileState extends State<NeonPuzzleTile>
     with SingleTickerProviderStateMixin {
-  /// Controller for playback
+  /// Controllers for rive animation playback
   late RiveAnimationController _riveControllerLeft;
-  late RiveAnimationController _riveControllerRight;
+  late RiveAnimationController _riveControllerMistake;
 
   /// Is the animation currently playing?
   bool _isPlayingLeft = false;
-  bool _isPlayingRight = false;
+  bool _isPlayingMistake = false;
 
   /// The controller that drives [_scale] animation.
   late AnimationController _controller;
@@ -60,17 +60,16 @@ class _NeonPuzzleTileState extends State<NeonPuzzleTile>
   void initState() {
     super.initState();
     _riveControllerLeft = OneShotAnimation(
-      'Rainbow_Roll_Left_Up',
+      'left up',
       autoplay: false,
       onStop: () => setState(() => _isPlayingLeft = false),
       onStart: () => setState(() => _isPlayingLeft = true),
     );
-
-    _riveControllerRight = OneShotAnimation(
-      'Rainbow_Roll_Right_Down',
+    _riveControllerMistake = OneShotAnimation(
+      'mistake',
       autoplay: false,
-      onStop: () => setState(() => _isPlayingRight = false),
-      onStart: () => setState(() => _isPlayingRight = true),
+      onStop: () => setState(() => _isPlayingMistake = false),
+      onStart: () => setState(() => _isPlayingMistake = true),
     );
 
     _controller = AnimationController(
@@ -89,8 +88,7 @@ class _NeonPuzzleTileState extends State<NeonPuzzleTile>
   @override
   Widget build(BuildContext context) {
     final size = widget.state.puzzle.getDimension();
-    final theme = context.select((ThemeBloc bloc) => bloc.state.theme);
-    const movementDuration = Duration(milliseconds: 2000);
+    const movementDuration = Duration(milliseconds: 500);
     final status = context.select((PuzzleBloc bloc) => bloc.state.puzzleStatus);
     final puzzleIncomplete =
         context.select((PuzzleBloc bloc) => bloc.state.puzzleStatus) ==
@@ -153,54 +151,45 @@ class _NeonPuzzleTileState extends State<NeonPuzzleTile>
                       MaterialStateProperty.all(PuzzleColors.white),
                   backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                     (states) {
-                      if (widget.tile.value ==
-                          widget.state.lastTappedTile?.value) {
-                        return Colors.transparent;
-                      } else if (states.contains(MaterialState.hovered)) {
-                        return theme.hoverColor;
-                      } else {
-                        return Colors.transparent;
-                      }
+                      return Colors.transparent;
                     },
                   ),
                 ),
                 onPressed: () {
-                  if (!_isPlayingLeft) {
-                    _riveControllerLeft.isActive = true;
-                  }
                   context.read<PuzzleBloc>().add(TileTapped(widget.tile));
+                  if (widget.state.puzzle.isTileMovable(widget.tile)) {
+                    print('moveable');
+                    _riveControllerLeft.isActive = true;
+                  } else {
+                    print('not moveable');
+                    _riveControllerMistake.isActive = true;
+                  }
                 },
-                child: BlocListener<PuzzleBloc, PuzzleState>(
-                  listenWhen: (previous, current) => current != previous,
-                  listener: (context, state) {
-                    // TODO: implement listener
-                    print('state ${state.toString()}');
-                  },
-                  child: Stack(
-                    children: [
-                      RiveAnimation.asset(
-                        'assets/rive/neon_animations_left.riv',
-                        animations: const [
-                          'Idle',
-                        ],
-                        controllers: [
-                          _riveControllerLeft,
-                          _riveControllerRight
-                        ],
-                        fit: BoxFit.cover,
-                      ),
-                      Center(
-                        child: Text(
+                child: Stack(
+                  children: [
+                    RiveAnimation.asset(
+                      'assets/rive/tile.riv',
+                      animations: const [
+                        'mistake',
+                        'left up',
+                      ],
+                      controllers: [
+                        _riveControllerMistake,
+                        _riveControllerLeft,
+                      ],
+                      fit: BoxFit.cover,
+                    ),
+                    Center(
+                      child: Text(
+                        widget.tile.value.toString(),
+                        semanticsLabel: context.l10n.puzzleTileLabelText(
                           widget.tile.value.toString(),
-                          semanticsLabel: context.l10n.puzzleTileLabelText(
-                            widget.tile.value.toString(),
-                            widget.tile.currentPosition.x.toString(),
-                            widget.tile.currentPosition.y.toString(),
-                          ),
+                          widget.tile.currentPosition.x.toString(),
+                          widget.tile.currentPosition.y.toString(),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
