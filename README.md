@@ -1,4 +1,4 @@
-# Slide Puzzle
+# Slide Puzzle - Neon
 
 ![Photo Booth Header][logo]
 
