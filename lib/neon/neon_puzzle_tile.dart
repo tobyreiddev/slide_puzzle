@@ -137,11 +137,6 @@ class _NeonPuzzleTileState extends State<NeonPuzzleTile>
                   textStyle: PuzzleTextStyle.body.copyWith(
                     fontSize: widget.tileFontSize,
                   ),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
                   padding: EdgeInsets.zero,
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent,
